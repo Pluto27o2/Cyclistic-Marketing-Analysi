@@ -1,1 +1,3 @@
-Credit Scoring Project for final
+# Credit Risk Classification Using Machine Learning
+
+## 1. Introduction
