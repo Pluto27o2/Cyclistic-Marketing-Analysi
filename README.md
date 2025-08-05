@@ -135,5 +135,87 @@ This classification allows the organization to:
 
 ---
 
+## 5. Results
+
+### 5.1 Summary of Findings
+
+This study developed and compared the performance of **six machine learning classification models** for predicting credit risk across **five customer risk categories**:
+
+- Logistic Regression  
+- Decision Tree  
+- Random Forest  
+- CatBoost  
+- Neural Network  
+- LightGBM  
+
+To address the severe **class imbalance** in the dataset, **SMOTE** was applied during training, improving representation for minority classes.  
+
+Model performance was evaluated on a **hold-out test set** using standard classification metrics:
+
+- Accuracy  
+- Precision  
+- Recall  
+- F1-score  
+- Confusion Matrix Distribution  
+
+---
+
+### 🔥 Best Performing Model: **LightGBM**
+
+| Metric            | Score    |
+|-------------------|----------|
+| Accuracy          | **78.73%** |
+| Macro F1-score    | **0.38**   |
+| Weighted F1-score | **0.83**   |
+
+- LightGBM showed the **most balanced classification behavior across all five classes**, particularly for **underrepresented groups** (Classes 2, 3, and 4).  
+- In **validation predictions**, it assigned:
+  - **5.61%** of samples to **Class 5**  
+  - **2.06%** to **Class 4**  
+- Unlike other models, it did **not over-predict the majority class (Class 1)** excessively.
+
+---
+
+### 📉 Comparative Model Analysis
+
+| Model           | Key Issues |
+|------------------|------------|
+| **Random Forest** | Over 92% of validation samples predicted as Class 1 → **biased** |
+| **Decision Tree** | Similar to RF: strong **majority class bias** |
+| **CatBoost**      | Failed to predict **any Class 3** cases; predictions concentrated on Class 1 |
+| **Neural Network**| **Lowest accuracy (55.74%)**, high overfitting: nearly **48%** predictions fell in Class 5 |
+| **Logistic Regression** | Lower performance overall, but offered **good interpretability** for baseline comparison |
+
+---
+
+### 🔍 Feature Importance Insights
+
+Feature importance from tree-based models (especially LightGBM and Random Forest) revealed:
+
+| Feature         | Description                                      | Importance |
+|------------------|--------------------------------------------------|------------|
+| `LAISUAT`        | Interest rate                                    | ⭐ High     |
+| `DUNO_QD_log`    | Log-overdue debt balance                         | ⭐ High     |
+| `CURR_BAL_log`   | Log-current outstanding balance                  | ⭐ High     |
+| Demographics     | (e.g., gender, customer type, region)            | 🔻 Low      |
+
+**Interpretation**:  
+> Financial behavior metrics — not demographic information — are **most predictive** of credit risk, aligning with fairness and data-driven best practices.
+
+---
+
+### ✅ Conclusion
+
+- **LightGBM** emerged as the **most effective and stable** model for credit risk classification.
+- It offers:
+  - High **technical performance**
+  - Balanced detection across risk levels
+  - Strong **generalization**
+- Its **ability to detect minority class patterns** while maintaining high accuracy makes it ideal for **deployment in credit scoring systems**.
+
+> LightGBM achieves the right balance between **accuracy**, **sensitivity**, and **operational reliability**, fulfilling both **statistical** and **real-world business** needs.
+
+
+
 > ⚠️ *Note:* All data has been either anonymized or simulated. Model development complies with responsible and ethical AI practices.
 
